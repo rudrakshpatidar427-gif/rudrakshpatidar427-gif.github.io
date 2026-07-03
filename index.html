@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google AdSense Verification -->
+    <meta name="google-adsense-account" content="ca-pub-3761834354871043">
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Currency Converter - Live Exchange Rates</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        h1 {
+            color: #302b63;
+            font-size: 28px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+        input, select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background: white;
+            color: #333;
+        }
+        input:focus, select:focus {
+            outline: none;
+            border-color: #302b63;
+        }
+        .swap-btn {
+            display: block;
+            margin: 10px auto;
+            background: #302b63;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 22px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            box-shadow: 0 4px 15px rgba(48, 43, 99, 0.3);
+        }
+        .swap-btn:hover {
+            transform: rotate(180deg);
+        }
+        .result-box {
+            background: linear-gradient(135deg, #302b63, #24243e);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .result-box .amount {
+            font-size: 32px;
+            font-weight: bold;
+        }
+        .result-box .rate {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 5px;
+        }
+        .update-time {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+        }
+        .ad-banner {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 20px;
+            border: 1px dashed #ddd;
+        }
+        .ad-unit {
+            min-height: 90px;
+            background: #f9f9f9;
+            border-radius: 12px;
+            margin: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #aaa;
+            font-size: 12px;
+            border: 1px dashed #ddd;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 25px; }
+            h1 { font-size: 22px; }
+            .result-box .amount { font-size: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+
+        <!-- AdSense Ad Unit -->
+        <div class="ad-unit">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3761834354871043" crossorigin="anonymous"></script>
+        </div>
+
+        <h1>💰 Currency Converter</h1>
+        <p class="subtitle">Live exchange rates • Updated daily</p>
+
+        <!-- Amount Input -->
+        <div class="input-group">
+            <label>Amount</label>
+            <input type="number" id="amount" value="1" min="0" step="0.01">
+        </div>
+
+        <!-- From Currency -->
+        <div class="input-group">
+            <label>From</label>
+            <select id="fromCurrency">
+                <option value="USD">🇺🇸 USD - US Dollar</option>
+                <option value="EUR">🇪🇺 EUR - Euro</option>
+                <option value="GBP">🇬🇧 GBP - British Pound</option>
+                <option value="INR" selected>🇮🇳 INR - Indian Rupee</option>
+                <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                <option value="CNY">🇨🇳 CNY - Chinese Yuan</option>
+                <option value="AED">🇦🇪 AED - UAE Dirham</option>
+                <option value="SAR">🇸🇦 SAR - Saudi Riyal</option>
+            </select>
+        </div>
+
+        <!-- Swap Button -->
+        <button class="swap-btn" id="swapBtn">⇄</button>
+
+        <!-- To Currency -->
+        <div class="input-group">
+            <label>To</label>
+            <select id="toCurrency">
+                <option value="USD" selected>🇺🇸 USD - US Dollar</option>
+                <option value="EUR">🇪🇺 EUR - Euro</option>
+                <option value="GBP">🇬🇧 GBP - British Pound</option>
+                <option value="INR">🇮🇳 INR - Indian Rupee</option>
+                <option value="JPY">🇯🇵 JPY - Japanese Yen</option>
+                <option value="AUD">🇦🇺 AUD - Australian Dollar</option>
+                <option value="CAD">🇨🇦 CAD - Canadian Dollar</option>
+                <option value="CNY">🇨🇳 CNY - Chinese Yuan</option>
+                <option value="AED">🇦🇪 AED - UAE Dirham</option>
+                <option value="SAR">🇸🇦 SAR - Saudi Riyal</option>
+            </select>
+        </div>
+
+        <!-- Result -->
+        <div class="result-box" id="resultBox">
+            <div class="amount" id="resultAmount">—</div>
+            <div class="rate" id="resultRate">Loading exchange rates...</div>
+        </div>
+
+        <div class="update-time" id="updateTime">Updating...</div>
+
+        <!-- AdSense Ad Unit - Bottom -->
+        <div class="ad-unit">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3761834354871043" crossorigin="anonymous"></script>
+        </div>
+
+        <div class="ad-banner">
+            📊 Real-time rates from ExchangeRate-API
+        </div>
+    </div>
+
+    <script>
+        // ========== CONFIGURATION ==========
+        // Your API key from ExchangeRate-API
+        const API_KEY = '6a8f7bbfea6d4b66cea6ff0b';
+        const BASE_URL = 'https://v6.exchangerate-api.com/v6/' + API_KEY + '/latest/';
+
+        // ========== DOM Elements ==========
+        const amountInput = document.getElementById('amount');
+        const fromCurrency = document.getElementById('fromCurrency');
+        const toCurrency = document.getElementById('toCurrency');
+        const swapBtn = document.getElementById('swapBtn');
+        const resultAmount = document.getElementById('resultAmount');
+        const resultRate = document.getElementById('resultRate');
+        const updateTime = document.getElementById('updateTime');
+
+        let exchangeRates = {};
+
+        // ========== Fetch Rates ==========
+        async function fetchRates(baseCurrency) {
+            try {
+                const response = await fetch(BASE_URL + baseCurrency);
+                if (!response.ok) throw new Error('API limit reached or invalid key');
+                const data = await response.json();
+                if (data.result === 'error') throw new Error(data['error-type']);
+                exchangeRates = data.conversion_rates;
+                updateTime.textContent = '📅 Updated: ' + new Date(data.time_last_update_utc).toLocaleString();
+                return true;
+            } catch (error) {
+                resultRate.textContent = '⚠️ ' + error.message;
+                resultAmount.textContent = 'Error';
+                return false;
+            }
+        }
+
+        // ========== Convert ==========
+        function convert() {
+            const amount = parseFloat(amountInput.value) || 0;
+            const from = fromCurrency.value;
+            const to = toCurrency.value;
+
+            if (!exchangeRates[from] || !exchangeRates[to]) {
+                resultAmount.textContent = 'Loading...';
+                return;
+            }
+
+            const inUSD = amount / exchangeRates[from];
+            const result = inUSD * exchangeRates[to];
+
+            resultAmount.textContent = result.toFixed(2) + ' ' + to;
+            resultRate.textContent = '1 ' + from + ' = ' + (exchangeRates[to] / exchangeRates[from]).toFixed(4) + ' ' + to;
+        }
+
+        // ========== Swap Currencies ==========
+        function swapCurrencies() {
+            const temp = fromCurrency.value;
+            fromCurrency.value = toCurrency.value;
+            toCurrency.value = temp;
+            convert();
+        }
+
+        // ========== Initialize ==========
+        async function init() {
+            resultAmount.textContent = '⏳ Loading...';
+            resultRate.textContent = 'Fetching exchange rates...';
+
+            const success = await fetchRates(fromCurrency.value);
+            if (success) {
+                convert();
+            }
+
+            amountInput.addEventListener('input', convert);
+            fromCurrency.addEventListener('change', async () => {
+                await fetchRates(fromCurrency.value);
+                convert();
+            });
+            toCurrency.addEventListener('change', convert);
+            swapBtn.addEventListener('click', swapCurrencies);
+        }
+
+        init();
+    </script>
+</body>
+</html>
