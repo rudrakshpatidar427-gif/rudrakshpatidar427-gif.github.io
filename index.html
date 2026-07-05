@@ -17,9 +17,6 @@
         body {
             background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
             min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
             padding: 20px;
         }
         .container {
@@ -27,8 +24,8 @@
             backdrop-filter: blur(10px);
             border-radius: 20px;
             padding: 40px;
-            max-width: 500px;
-            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
             box-shadow: 0 20px 60px rgba(0,0,0,0.5);
         }
         h1 {
@@ -129,6 +126,39 @@
             font-size: 12px;
             border: 1px dashed #ddd;
         }
+        
+        /* Content Section - NEW */
+        .content-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .content-section h2 {
+            color: #302b63;
+            font-size: 22px;
+            margin-bottom: 15px;
+        }
+        .content-section h3 {
+            color: #302b63;
+            font-size: 18px;
+            margin: 20px 0 10px;
+        }
+        .content-section p {
+            color: #444;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 15px;
+        }
+        .content-section ul {
+            color: #444;
+            line-height: 1.8;
+            margin-left: 20px;
+            margin-bottom: 15px;
+        }
+        .content-section li {
+            margin-bottom: 8px;
+        }
+
         @media (max-width: 480px) {
             .container { padding: 25px; }
             h1 { font-size: 22px; }
@@ -203,6 +233,40 @@
             <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3761834354871043" crossorigin="anonymous"></script>
         </div>
 
+        <!-- ===== NEW CONTENT SECTION (Fixes Policy Violation) ===== -->
+        <div class="content-section">
+            <h2>📊 Understanding Currency Exchange Rates</h2>
+            
+            <p>Currency exchange rates are the backbone of international trade and travel. Whether you're planning a trip abroad, sending money to family overseas, or running a business with international clients, knowing the current exchange rate is essential.</p>
+
+            <h3>What Are Exchange Rates?</h3>
+            <p>An exchange rate is the value of one country's currency compared to another. For example, if the USD to INR exchange rate is 83.50, it means 1 US Dollar equals 83.50 Indian Rupees. These rates fluctuate constantly based on economic factors, global events, and market demand.</p>
+
+            <h3>Factors That Affect Exchange Rates</h3>
+            <ul>
+                <li><strong>Inflation rates:</strong> Countries with lower inflation typically see an appreciation in their currency value.</li>
+                <li><strong>Interest rates:</strong> Higher interest rates attract foreign investment, strengthening the currency.</li>
+                <li><strong>Political stability:</strong> Countries with stable governments have stronger currencies.</li>
+                <li><strong>Economic performance:</strong> Strong GDP growth and low unemployment boost currency value.</li>
+                <li><strong>Trade balance:</strong> Countries with surplus exports often have stronger currencies.</li>
+            </ul>
+
+            <h3>Why Use a Currency Converter?</h3>
+            <p>A reliable currency converter helps you make informed decisions. Whether you're:</p>
+            <ul>
+                <li><strong>Traveling:</strong> Know exactly how much your money is worth in your destination country.</li>
+                <li><strong>Freelancing:</strong> Convert your international payments to your local currency.</li>
+                <li><strong>Investing:</strong> Monitor currency movements to make better investment choices.</li>
+                <li><strong>Shopping online:</strong> Compare prices across different countries and currencies.</li>
+            </ul>
+
+            <h3>How to Use This Tool</h3>
+            <p>Simply enter the amount you want to convert, select the "From" currency and the "To" currency, and the tool will show you the live conversion rate. The rates are updated daily using the ExchangeRate-API, ensuring you always get accurate information.</p>
+
+            <p><strong>Disclaimer:</strong> The exchange rates provided are for informational purposes only and may differ from actual bank rates. Always confirm with your bank or financial institution before making significant financial decisions.</p>
+        </div>
+        <!-- ===== END OF CONTENT SECTION ===== -->
+
         <div class="ad-banner">
             📊 Real-time rates from ExchangeRate-API
         </div>
@@ -210,7 +274,6 @@
 
     <script>
         // ========== CONFIGURATION ==========
-        // Your API key from ExchangeRate-API
         const API_KEY = '6a8f7bbfea6d4b66cea6ff0b';
         const BASE_URL = 'https://v6.exchangerate-api.com/v6/' + API_KEY + '/latest/';
 
@@ -290,4 +353,4 @@
         init();
     </script>
 </body>
-</html>
+    </html>
