@@ -92,8 +92,6 @@
             font-size: 12px;
             color: #999;
         }
-        
-        /* Content Section */
         .content-section {
             margin-top: 30px;
             padding-top: 25px;
@@ -190,7 +188,6 @@
 
     <div class="update-time" id="updateTime">Updating...</div>
 
-    <!-- Content Section -->
     <div class="content-section">
         <h2>📊 Understanding Currency Exchange Rates</h2>
         
@@ -289,7 +286,7 @@
         if (success) convert();
 
         amountInput.addEventListener('input', convert);
-        fromCurrency.addEventListener('change', async () => {
+        fromCurrency.addEventListener('change', async function() {
             await fetchRates(fromCurrency.value);
             convert();
         });
@@ -301,4 +298,4 @@
 </script>
 
 </body>
-    </html>
+</html>
