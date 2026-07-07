@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://rudrakshpatidar427-gif.github.io/sitemap.xml
