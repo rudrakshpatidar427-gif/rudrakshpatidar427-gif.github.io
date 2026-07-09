@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - Calculate Your Exact Age</title>
+    <meta name="description" content="Calculate your exact age in years, months, and days. Free online age calculator tool.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 600px;
+            margin: 0 auto;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+        h1 {
+            color: #302b63;
+            font-size: 26px;
+            text-align: center;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: 600;
+            color: #333;
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            background: white;
+        }
+        input:focus {
+            border-color: #302b63;
+            outline: none;
+        }
+        .result-box {
+            background: linear-gradient(135deg, #302b63, #24243e);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .result-box .amount {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .result-box .label {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+        .content-section {
+            margin-top: 30px;
+            padding-top: 25px;
+            border-top: 2px solid #e0e0e0;
+        }
+        .content-section h2 {
+            color: #302b63;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+        .content-section p {
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 12px;
+            font-size: 15px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 15px;
+            color: #302b63;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        @media (max-width: 480px) {
+            .container { padding: 20px; }
+            h1 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <h1>🎂 Age Calculator</h1>
+    <p class="subtitle">Find your exact age in years, months, and days</p>
+
+    <div class="input-group">
+        <label>📅 Date of Birth</label>
+        <input type="date" id="dob">
+    </div>
+
+    <div class="result-box">
+        <div class="label">Your Age</div>
+        <div class="amount" id="ageResult">—</div>
+        <div style="margin-top:5px;font-size:14px;opacity:0.8;" id="ageDetail"></div>
+    </div>
+
+    <div class="content-section">
+        <h2>📝 How to Use</h2>
+        <p>Select your date of birth and the calculator will instantly show your exact age in years, months, and days.</p>
+
+        <p><strong>Note:</strong> This calculator shows your age up to the current date. Perfect for checking eligibility for school, jobs, and personal records.</p>
+    </div>
+
+    <a href="https://rudrakshpatidar427-gif.github.io/" class="back-link">← Back to Home</a>
+
+</div>
+
+<script>
+    function calculateAge() {
+        const dobInput = document.getElementById('dob').value;
+        if (!dobInput) {
+            document.getElementById('ageResult').textContent = 'Select your date of birth';
+            document.getElementById('ageDetail').textContent = '';
+            return;
+        }
+
+        const dob = new Date(dobInput);
+        const today = new Date();
+
+        let years = today.getFullYear() - dob.getFullYear();
+        let months = today.getMonth() - dob.getMonth();
+        let days = today.getDate() - dob.getDate();
+
+        if (days < 0) {
+            months--;
+            const prevMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+            days += prevMonth.getDate();
+        }
+
+        if (months < 0) {
+            years--;
+            months += 12;
+        }
+
+        document.getElementById('ageResult').textContent = years + ' years';
+        document.getElementById('ageDetail').textContent = months + ' months, ' + days + ' days';
+    }
+
+    document.getElementById('dob').addEventListener('change', calculateAge);
+
+    // Set default date
+    const today = new Date();
+    const defaultDate = new Date(today.getFullYear() - 20, today.getMonth(), today.getDate());
+    const year = defaultDate.getFullYear();
+    const month = String(defaultDate.getMonth() + 1).padStart(2, '0');
+    const day = String(defaultDate.getDate()).padStart(2, '0');
+    document.getElementById('dob').value = year + '-' + month + '-' + day;
+    calculateAge();
+</script>
+
+</body>
+</html>
